@@ -1,4 +1,4 @@
-# GTD: Container/stub site for django-todo
+# To Do App: Container/stub site for django-todo
 
 [Django-todo](https://github.com/shacker/django-todo) is a reusable app that can be plugged into any
 running Django project. If you don't have a handy Django project to plug it into, or just want a
