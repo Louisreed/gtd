@@ -11,6 +11,54 @@ h7 {
     padding: 0 !important;
 }
 
+.bg-gradient-morning {
+    background: linear-gradient(320deg, #1266f1, #e67e22, #1266f1) !important;
+    background-size: 600% 600% !important;
+    -webkit-animation: ToDoMorning 30s ease infinite !important;
+    -moz-animation: ToDoMorning 30s ease infinite !important;
+    animation: ToDoMorning 30s ease infinite !important;
+
+    @-webkit-keyframes ToDoMorning {
+        0%{background-position:11% 0%}
+        50%{background-position:90% 100%}
+        100%{background-position:11% 0%}
+    }
+    @-moz-keyframes ToDoMorning {
+        0%{background-position:11% 0%}
+        50%{background-position:90% 100%}
+        100%{background-position:11% 0%}
+    }
+    @keyframes ToDoMorning {
+        0%{background-position:11% 0%}
+        50%{background-position:90% 100%}
+        100%{background-position:11% 0%}
+    }
+}
+
+.bg-gradient-evening {
+    background: linear-gradient(320deg, #1266f1, #424242, #424242, #1266f1, #1266f1);
+    background-size: 1000% 1000%;
+
+    -webkit-animation: ToDoEvening 30s ease infinite;
+    -moz-animation: ToDoEvening 30s ease infinite;
+    animation: ToDoEvening 30s ease infinite;
+}
+
+@-webkit-keyframes ToDoEvening {
+    0%{background-position:11% 0%}
+    50%{background-position:90% 100%}
+    100%{background-position:11% 0%}
+}
+@-moz-keyframes ToDoEvening {
+    0%{background-position:11% 0%}
+    50%{background-position:90% 100%}
+    100%{background-position:11% 0%}
+}
+@keyframes ToDoEvening {
+    0%{background-position:11% 0%}
+    50%{background-position:90% 100%}
+    100%{background-position:11% 0%}
+}
 
 .btn-block+.btn-block {
     margin-top: 0 !important;

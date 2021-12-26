@@ -3,7 +3,7 @@
 {% block title %}Add Todo List{% endblock %}
 {% block content %}
 
-  <h2>Add a list:</h2>
+  <h2 class="my-4"><i class="fas fa-stream"></i> Add a list:</h2>
 
   <form action="" method="post">
     {% csrf_token %}
@@ -18,6 +18,6 @@
       {{form.group}}
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
   </form>
 {% endblock %}

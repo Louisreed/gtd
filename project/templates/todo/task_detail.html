@@ -4,6 +4,10 @@
 
 {% block extrahead %}
 <style>
+  body {
+    background-color: #f8f8f8;
+  }
+
   .select2 {
     width: 100% !important;
   }
@@ -21,46 +25,46 @@
 {% block content %}
 
 <div class="card">
-  <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/062.webp" class="card-img-top" alt="Chicago Skyscrapers" />
+  <div class="img-container">
+    <img src="https://source.unsplash.com/random/?{{task.title}}" class="card-img-top" alt="{{task.title}}" />
+  </div>
   <div class="card-body">
-    <h5 class="card-title">{{ task.title }}</h5>
+    <h5 class="card-title mb-2">{{ task.title }}</h5>
     {% if task.note %}
     <div class="card-text">{{ task.note|safe|urlize|linebreaks }}</div>
     {% endif %}
     <p class="card-text">
       {{ task.description }}
     </p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-      <strong>Assigned to:</strong>
-      {% if task.assigned_to %} {{ task.assigned_to.get_full_name }} {% else %} Anyone {% endif %}
-    </li>
-    <li class="list-group-item">
-      <strong>Created by:</strong> {{ task.created_by.get_full_name }}
-    </li>
-    <li class="list-group-item">
-      <strong>Due date:</strong> {{ task.due_date }}
-    </li>
+    <ul class="list-group">
+      <li class="list-group-item">
+        <strong><i class="fas fa-user-tag"></i> Assigned to:</strong>
+        {% if task.assigned_to %} {{ task.assigned_to.get_full_name }} {% else %} Anyone {% endif %}
+      </li>
+      <li class="list-group-item">
+        <strong><i class="fas fa-user-edit"></i> Created by:</strong> {{ task.created_by.get_full_name }}
+      </li>
+      <li class="list-group-item">
+        <strong><i class="fas fa-calendar-day"></i> Due date:</strong> {{ task.due_date }}
+      </li>
 
-    {% if task.completed %}
-    <li class="list-group-item">
-      <strong>Completed on:</strong> {{ task.completed_date}}
-    </li>
-    {% else %}
-    <li class="list-group-item">
-      <strong>Completed:</strong> {{ task.completed|yesno:"Yes,No" }}
-    </li>
-    {% endif %}
+      {% if task.completed %}
+      <li class="list-group-item">
+        <strong><i class="fas fa-calendar-check"></i> Completed on:</strong> {{ task.completed_date}}
+      </li>
+      {% else %}
+      <li class="list-group-item">
+        <strong><i class="fas fa-check"></i> Completed:</strong> {{ task.completed|yesno:"Yes,No" }}
+      </li>
+      {% endif %}
 
-    <li class="list-group-item">
-      <strong>In list:</strong>
-      <a href="{% url 'todo:list_detail' task.task_list.id task.task_list.slug %}">
-        {{ task.task_list }}
-      </a>
-    </li>
-  </ul>
-  <div class="card-body">
+      <li class="list-group-item">
+        <strong><i class="fas fa-stream"></i> In list:</strong>
+        <a href="{% url 'todo:list_detail' task.task_list.id task.task_list.slug %}">
+          {{ task.task_list }}
+        </a>
+      </li>
+    </ul>
 
     <button class="btn btn-primary btn-block my-2" id="EditTaskButton" type="button" data-mdb-toggle="collapse"
       data-mdb-target="#TaskEdit">
@@ -111,16 +115,17 @@
       </form>
       {% endif %}
     </div>
+
   </div>
 </div>
 
 {% if attachments_enabled %}
 <div class="card mt-4">
-  <h5 class="card-header">
-    <i class="fas fa-paperclip"></i> Attachments
-  </h5>
+  <div class="card-body">
+    <h5 class="card-title">
+      <i class="fas fa-paperclip"></i> Attachments
+    </h5>
 
-  <div class="card-body pb-0">
     {% if task.attachment_set.count %}
     <div class="table-responsive">
       <table class="table mb-3">
@@ -155,7 +160,7 @@
 
     <form method="POST" action="" enctype="multipart/form-data">
       {% csrf_token %}
-      <div class="mb-3">
+      <div class="my-3">
         <div class="custom-file">
           <input type="file" class="custom-file-input" id="attachment_file_input" name="attachment_file_input" />
           <button class="btn btn-primary btn-block mt-3"><i class="fas fa-upload"></i> Upload</button>
@@ -164,10 +169,12 @@
     </form>
 
   </div>
-  {% endif %}
+</div>
+{% endif %}
 
-  <div class="card mt-4">
-    <h5 class="card-header">
+<div class="card mt-4">
+  <div class="card-body">
+    <h5 class="card-title">
       <i class="fas fa-comment"></i> Add Comment
     </h5>
     <form action="" method="post" class="card-body">
@@ -178,50 +185,51 @@
       <input class="btn btn-block btn-primary mt-2" type="submit" name="add_comment" value="Add Comment">
     </form>
   </div>
+</div>
 
-  <div class="task_comments mt-4">
-    {% if comment_list %}
-    <div class="mb-3 card">
-      <div class="card-header">
-        <h5>Comments on this task:</h5>
-        {% for comment in comment_list %}
-        <div class="mb-3">
-          <div class="card-header">
-            <div class="float-left">
-              {% if comment.email_message_id %}
-              <span class="badge badge-warning">email</span>
-              {% endif %}
-              {{ comment.author_text }}
-            </div>
-            <span class="float-right d-inline-block text-muted">
-              {{ comment.date|date:"F d Y P" }}
-            </span>
+{% if comment_list %}
+<div class="task_comments mt-4">
+  <div class="mb-3 card">
+    <div class="card-header">
+      <h5>Comments on this task:</h5>
+      {% for comment in comment_list %}
+      <div class="mb-3">
+        <div class="card-header">
+          <div class="float-left">
+            {% if comment.email_message_id %}
+            <span class="badge badge-warning">email</span>
+            {% endif %}
+            {{ comment.author_text }}
           </div>
-          <div class="{{ comment_classes | join:" " }} card-body">
-            {{ comment.body|safe|urlize|linebreaks }}
-          </div>
+          <span class="float-right d-inline-block text-muted">
+            {{ comment.date|date:"F d Y P" }}
+          </span>
         </div>
-        {% endfor %}
+        <div class="{{ comment_classes | join:" " }} card-body">
+          {{ comment.body|safe|urlize|linebreaks }}
+        </div>
       </div>
+      {% endfor %}
     </div>
-    {% else %}
-    <div class="mb-3 card">
-      <div class="card-header">
-        <h5>No comments</h5>
-      </div>
-    </div>
-    {% endif %}
   </div>
+  {% else %}
+  <div class="mb-3 card">
+    <div class="card-header">
+      <h5>No comments</h5>
+    </div>
+  </div>
+  {% endif %}
   {% endblock %}
+</div>
 
-  {% block extra_js %}
-  {# Support file attachment uploader #}
-  <script>
-    $('#attachment_file_input').on('change', function () {
-      // Get the file name and remove browser-added "fakepath."
-      // Then replace the "Choose a file" label.
-      var fileName = $(this).val().replace('C:\\fakepath\\', " ");
-      $(this).next('.custom-file-label').html(fileName);
-    })
-  </script>
-  {% endblock extra_js %}
+{% block extra_js %}
+{# Support file attachment uploader #}
+<script>
+  $('#attachment_file_input').on('change', function () {
+    // Get the file name and remove browser-added "fakepath."
+    // Then replace the "Choose a file" label.
+    var fileName = $(this).val().replace('C:\\fakepath\\', " ");
+    $(this).next('.custom-file-label').html(fileName);
+  })
+</script>
+{% endblock extra_js %}

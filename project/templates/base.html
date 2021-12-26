@@ -80,12 +80,18 @@
 
   <header>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <!-- Container wrapper -->
       <div class="container">
         <!-- Navbar brand -->
         <a class="navbar-brand me-2" href="/">
-          <h4 style="margin-bottom: 0;">Louis' To Do</h4>
+          {% if task_count > 0 %}
+          <h4 style="margin-bottom: 0;">{{ task_count }} task{% if task_count >= 2%}s{%endif%} outstanding</h4>
+          {% elif task_count < 1 %}
+          <h4 style="margin-bottom: 0;">Nothing To Do!</h4>
+          {% else %}
+          <h4 style="margin-bottom: 0;">To Do</h4>
+          {% endif %}
         </a>
 
         <!-- Toggle button -->
@@ -156,7 +162,7 @@
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="footer">
+  <footer class="footer py-4" data-mdb-sticky-position="bottom">
     <div class="container">
       <span class="text-muted">
         {% now "D d M Y" %} -
@@ -182,3 +188,25 @@
 </body>
 
 </html>
+
+<!-- Time controller -->
+<script>
+  $(document).ready(function () {
+    var dt = new Date().getHours();
+    console.log(dt);
+    $('.navbar').addClass('bg-gradient-morning');
+    if (dt >= 1 && dt < 12) {
+      // Morning
+      console.log("It's morning");
+      $('.navbar').removeClass('.bg-gradient-evening navbar-light').addClass('bg-gradient-morning');
+    } else if (dt >= 12 && dt < 18) {
+      // Midday
+      console.log("It's midday");
+      $('.navbar').removeClass('bg-light').addClass('bg-gradient-midday');
+    } else if (dt >= 18) {
+      // Evening
+      console.log("It's evening");
+      $('.navbar').removeClass('bg-gradient-morning').addClass('bg-gradient-evening');
+    };
+  });
+</script>
