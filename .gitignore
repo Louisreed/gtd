@@ -110,3 +110,4 @@ ENV/
 
 # Media
 media/*
+db.sqlite3
