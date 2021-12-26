@@ -34,7 +34,7 @@ build:
 	$(MANAGESCRIPT) migrate
 
 run: build
-	$(MANAGESCRIPT) runserver 
+	$(MANAGESCRIPT) runserver 0.0.0.0:8000
 
 requirements:
 	pip freeze > requirements.txt
