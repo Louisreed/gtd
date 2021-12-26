@@ -5,9 +5,12 @@ PYTHONLIBS=uwsgi Django python3-pip
 
 default: install upgrade build
 
+python:
+	sudo apt install software-properties-common
+	sudo add-apt-repository ppa:deadsnakes/ppa
+	sudo apt install python3.9
+
 install:
-	sudo apt install python3-pip	
-	pip3 install --user git+https://github.com/pypa/pipenv.git
 	pipenv --python 3.9
 	pipenv install
 	pipenv shell
@@ -31,7 +34,7 @@ build:
 	$(MANAGESCRIPT) migrate
 
 run: build
-	$(MANAGESCRIPT) runserver
+	$(MANAGESCRIPT) runserver 
 
 requirements:
 	pip freeze > requirements.txt
