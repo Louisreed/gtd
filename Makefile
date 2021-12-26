@@ -1,11 +1,12 @@
 PIP=env/bin/pip
 PYTHON=env/bin/python
 MANAGESCRIPT=./manage.py
-PYTHONLIBS=uwsgi Django
+PYTHONLIBS=uwsgi Django python3-pip
 
 default: install upgrade build
 
 install:
+	sudo apt install python3-pip	
 	pip3 install --user git+https://github.com/pypa/pipenv.git
 	pipenv --python 3.9
 	pipenv install
