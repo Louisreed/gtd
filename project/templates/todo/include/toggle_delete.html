@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-between">
+  {% if list_slug != "mine" %}
+    {% if view_completed %}
+      <a href="{% url 'todo:list_detail' list_id list_slug %}" class="btn btn-sm btn-warning">View incomplete tasks</a>
+
+    {% else %}
+      <a href="{% url 'todo:list_detail_completed' list_id list_slug %}" class="btn btn-sm btn-success mx-2"><i class="fa fa-check"></i> View completed tasks</a>
+
+    {% endif %}
+
+    <a href="{% url 'todo:del_list' list_id list_slug %}" class="btn btn-sm btn-danger mx-2"><i class="fa fa-times"></i> Delete this list</a>
+  {% endif %}
+</div>
