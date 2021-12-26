@@ -1,1 +1,25 @@
 /* Bootstrap overrides */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h7 {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+.btn-block+.btn-block {
+    margin-top: 0 !important;
+}
+
+.bg-dark {
+    background-color: #424242 !important;
+}
+
+.btn-secondary {
+    background-color: orange !important;
+}

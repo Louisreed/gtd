@@ -6,7 +6,7 @@
 {% block content %}
 
 {% if list_slug != "mine" %}
-<button class="btn btn-primary btn-md btn-block" id="AddTaskButton" type="button" data-mdb-toggle="collapse"
+<button class="btn btn-primary btn-lg btn-block text-change" id="AddTaskButton" type="button" data-mdb-toggle="collapse"
     data-mdb-target="#AddEditTask"><i class="fas fa-tasks"></i> Create New Task</button>
 
 {# Task edit / new task form #}
@@ -18,32 +18,30 @@
 
 {% if tasks %}
 {% if list_slug == "mine" %}
-<h1>Tasks assigned to me (in all groups)</h1>
+<h1><i class="fas fa-check"></i> Tasks</h1>
 {% else %}
 <h1>{{ view_completed|yesno:"Completed tasks, Tasks" }} in "{{ task_list.name }}"</h1>
 <p><small><i>In workgroup "{{ task_list.group }}" - drag rows to set priorities.</i></small></p>
 {% endif %}
 
-<table class="table table-striped" id="tasktable">
+<table class="table table-striped mt-4" id="tasktable">
     <tr class="nodrop">
         <th>Task</th>
         <th>Due</th>
-        <th>User</th>
         <th>Status</th>
     </tr>
 
     {% for task in tasks %}
     <tr id="{{ task.id }}">
         <td>
-            <a href="{% url 'todo:task_detail' task.id %}">{{ task.title|truncatewords:10 }}</a>
+            <a href="{% url 'todo:task_detail' task.id %}">
+                <h6>{{ task.title|truncatewords:10 }}</h6>
+            </a>
         </td>
         <td>
             <span {% if task.overdue_status %}class="overdue" {% endif %}>
                 {{ task.due_date|date:"m/d/Y" }}
             </span>
-        </td>
-        <td>
-            {% if task.assigned_to %}{{ task.assigned_to }}{% else %}Anyone{% endif %}
         </td>
         <td>
             <form method="post" action="{% url "todo:task_toggle_done" task.id %}" role="form">
@@ -95,13 +93,16 @@
             }
         });
 
-    });
+        // When adding a task, change the text of the Add Task button
+        $('#AddEditTask').on('show.bs.collapse', function () {
+            // Update icon, text and colour
+            $('#AddTaskButton').html('<i class="fas fa-times"></i> Cancel').removeClass('btn-primary').addClass('btn-danger');
+        });
+        $('#AddEditTask').on('hide.bs.collapse', function () {
+            // Update icon, text and colour
+            $('#AddTaskButton').html('<i class="fas fa-tasks"></i> Create New Task').removeClass('btn-danger').addClass('btn-primary');
+        });
 
-    // When adding a task, change the text of the Add Task button
-    function handleClick() {
-        console.log(this.innerHTML);
-        this.innerHTML = (this.innerHTML == '<i class="fas fa-tasks"></i> Edit Task' ? 'Cancel' : '<i class="fas fa-tasks"></i> Edit Task');
-    }
-    document.getElementById('AddTaskButton').onclick = handleClick;
+    });
 </script>
 {% endblock extra_js %}

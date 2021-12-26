@@ -20,7 +20,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
-  <link href="/static/css/sticky-footer-navbar.css" rel="stylesheet">
+  <link href="/static/css/styles.css" rel="stylesheet">
 
   {# Additional CSS or html head data inserted by templates here. #}
   {% block extrahead %}{% endblock extrahead %}
@@ -79,46 +79,13 @@
   </style>
 
   <header>
-    <!-- Fixed navbar
-    <nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
-      <a class="navbar-brand" href="/">To Do</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          {% if user.is_authenticated %}
-          <li class="nav-item"><a href="{% url 'todo:lists' %}" class="nav-link">Lists</a></li>
-          <li class="nav-item"><a href="{% url 'todo:mine' %}" class="nav-link">Tasks</a></li>
-          <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Log Out</a></li>
-          {# Simulate external user adding ticket #}
-          <li class="nav-item"><a href="{% url 'todo:external_add' %}" class="nav-link">File Ticket</a></li>
-          <li class="nav-item"><a href="{% url 'todo:import_csv' %}" class="nav-link">Import</a></li>
-
-          {% else %}
-          <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Log In</a></li>
-          {% endif %}
-        </ul>
-
-        {% if user.is_authenticated %}
-        <form class="form-inline mt-2 mt-md-0" action="{% url 'todo:search' %}" method="get" placeholder="Search"
-          aria-label="Search">
-          <input type="text" name="q" value="" class="form-control mr-sm-2" id="q">
-          <input type="submit" value="Search Tasks" class="btn btn-outline-success my-2 my-sm-0">
-        </form>
-        {% endif %}
-
-      </div>
-    </nav>-->
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <!-- Container wrapper -->
       <div class="container">
         <!-- Navbar brand -->
         <a class="navbar-brand me-2" href="/">
-          <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="16" alt="MDB Logo"
-            loading="lazy" style="margin-top: -1px;" />
+          <h4 style="margin-bottom: 0;">Louis' To Do</h4>
         </a>
 
         <!-- Toggle button -->
@@ -128,19 +95,36 @@
         </button>
 
         <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+        <div class="collapse navbar-collapse show" id="navbarButtonsExample">
+
           {% if user.is_authenticated %}
-          <!-- Left links -->
-          <div class="d-flex mt-4">
-            <a href="{% url 'todo:lists' %}" type="button" class="btn btn-primary btn-block mx-2">
-              <i class="fas fa-list"></i> Lists
+          <div class="container">
+            <form class="form mt-4" action="{% url 'todo:search' %}" method="get" placeholder="Search"
+              aria-label="Search">
+              <div class="input-group">
+                <div class="form-outline flex-fill">
+                  <input type="search" id="form1" name="q" class="form-control bg-light" id="q" />
+                  <label class="form-label" for="form1">Search</label>
+                </div>
+                <button type="submit" class="btn btn-dark">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+          {% endif %}
+
+          {% if user.is_authenticated %}
+          <!-- Links -->
+          <div class="d-flex justify-content-between my-4">
+            <a class="btn btn-lg btn-light btn-block mx-2" href="{% url 'todo:lists' %}" role="button"><i
+                class="fas fa-stream"></i> Lists </a>
+            <a href="{% url 'todo:mine' %}" type="button" class="btn btn-lg btn-light btn-block mx-2">
+              <i class="fas fa-check"></i> Tasks
             </a>
-            <a href="{% url 'todo:mine' %}" type="button" class="btn btn-primary btn-block mx-2">
-              <i class="fas fa-tasks"></i> Tasks
-            </a>
-            <a href="{% url 'logout' %}" type="button" class="btn btn-danger btn-block mx-2">
+            <!--<a href="{% url 'logout' %}" type="button" class="btn btn-danger btn-sm mx-2">
               <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
+            </a>-->
           </div>
           {% else %}
           <div class="d-flex align-items-center">
@@ -163,7 +147,7 @@
 
     {% if messages %}
     {% for message in messages %}
-    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+    <div class="alert mt-3 {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
     {% endfor %}
     {% endif %}
 
@@ -175,8 +159,10 @@
   <footer class="footer">
     <div class="container">
       <span class="text-muted">
-        To Do {% now "Y" %} -
-        {% if user.is_authenticated %}Logged in as <strong>{{ user.username }}</strong>{% endif %}</span>
+        {% now "D d M Y" %} -
+        {% if user.is_authenticated %}Logged in as <strong>{% if user.first_name %}{{user.first_name}}
+          {% if user.last_name %}{{user.last_name}} {%endif%} {%else%} {{ user.username }}
+          {% endif %}</strong>{% endif %}</span>
     </div>
   </footer>
 
