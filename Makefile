@@ -6,9 +6,9 @@ PYTHONLIBS=uwsgi Django
 default: install upgrade build
 
 install:
-	sudo pipenv --python 3.9
-	sudo pipenv install
-	sudo pipenv shell
+	pipenv --python 3.9
+	pipenv install
+	pipenv shell
 
 collectstatic: install
 	$(MANAGESCRIPT) collectstatic --noinput
@@ -30,6 +30,9 @@ build:
 
 run: build
 	$(MANAGESCRIPT) runserver
+
+requirements:
+	pip freeze > requirements.txt
 
 resetdatamodel:
 	find . -not \( -path  ./env -prune \) -not -name __init__.py -wholename \*migrations\*.py -exec rm \{\} \;
