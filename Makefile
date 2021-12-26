@@ -6,6 +6,7 @@ PYTHONLIBS=uwsgi Django
 default: install upgrade build
 
 install:
+	pip3 install --user git+https://github.com/pypa/pipenv.git
 	pipenv --python 3.9
 	pipenv install
 	pipenv shell
