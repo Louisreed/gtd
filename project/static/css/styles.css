@@ -12,27 +12,28 @@ h7 {
 }
 
 .bg-gradient-morning {
-    background: linear-gradient(320deg, #1266f1, #e67e22, #1266f1) !important;
-    background-size: 600% 600% !important;
-    -webkit-animation: ToDoMorning 30s ease infinite !important;
-    -moz-animation: ToDoMorning 30s ease infinite !important;
-    animation: ToDoMorning 30s ease infinite !important;
+    background: linear-gradient(327deg, #fdd835, #ffb300, #fb8c00, #1266f1);
+    background-size: 800% 800%;
 
-    @-webkit-keyframes ToDoMorning {
-        0%{background-position:11% 0%}
-        50%{background-position:90% 100%}
-        100%{background-position:11% 0%}
-    }
-    @-moz-keyframes ToDoMorning {
-        0%{background-position:11% 0%}
-        50%{background-position:90% 100%}
-        100%{background-position:11% 0%}
-    }
-    @keyframes ToDoMorning {
-        0%{background-position:11% 0%}
-        50%{background-position:90% 100%}
-        100%{background-position:11% 0%}
-    }
+    -webkit-animation: ToDoMorning 30s ease infinite;
+    -moz-animation: ToDoMorning 30s ease infinite;
+    animation: ToDoMorning 30s ease infinite;
+}
+
+@-webkit-keyframes ToDoMorning {
+    0%{background-position:0% 11%}
+    50%{background-position:100% 90%}
+    100%{background-position:0% 11%}
+}
+@-moz-keyframes ToDoMorning {
+    0%{background-position:0% 11%}
+    50%{background-position:100% 90%}
+    100%{background-position:0% 11%}
+}
+@keyframes ToDoMorning {
+    0%{background-position:0% 11%}
+    50%{background-position:100% 90%}
+    100%{background-position:0% 11%}
 }
 
 .bg-gradient-evening {
@@ -66,8 +67,4 @@ h7 {
 
 .bg-dark {
     background-color: #424242 !important;
-}
-
-.btn-secondary {
-    background-color: orange !important;
 }
