@@ -5,10 +5,13 @@ h2,
 h3,
 h4,
 h5,
-h6,
-h7 {
+h6 {
     margin: 0 !important;
     padding: 0 !important;
+}
+
+.badge {
+    font-size: 1em !important;
 }
 
 .bg-gradient-morning {

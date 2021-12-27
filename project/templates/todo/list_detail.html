@@ -6,8 +6,8 @@
 {% block content %}
 
 {% if list_slug != "mine" %}
-<button class="btn btn-primary btn-lg btn-block text-change" id="AddTaskButton" type="button" data-mdb-toggle="collapse"
-    data-mdb-target="#AddEditTask"><i class="fas fa-tasks"></i> Create New Task</button>
+<button class="btn btn-success btn-lg btn-block text-change" id="AddTaskButton" type="button" data-mdb-toggle="collapse"
+    data-mdb-target="#AddEditTask"><i class="fas fa-plus"></i> Create New Task</button>
 
 {# Task edit / new task form #}
 <div id="AddEditTask" class="collapse">
@@ -46,7 +46,7 @@
         <td>
             <form method="post" action="{% url "todo:task_toggle_done" task.id %}" role="form">
                 {% csrf_token %}
-                <button class="btn btn-md btn-block {% if view_completed %}btn-success{% else %}btn-warning{% endif %}"
+                <button class="btn btn-sm btn-block {% if view_completed %}btn-success{% else %}btn-dark{% endif %}"
                     type="submit" name="toggle_done">
                     {% if view_completed %}
                     <i class="fas fa-check"></i> Completed
@@ -100,7 +100,7 @@
         });
         $('#AddEditTask').on('hide.bs.collapse', function () {
             // Update icon, text and colour
-            $('#AddTaskButton').html('<i class="fas fa-tasks"></i> Create New Task').removeClass('btn-danger').addClass('btn-primary');
+            $('#AddTaskButton').html('<i class="fas fa-plus"></i> Create New Task').removeClass('btn-danger').addClass('btn-primary');
         });
 
     });
