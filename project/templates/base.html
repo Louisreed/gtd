@@ -125,12 +125,8 @@
           <div class="d-flex justify-content-between my-4">
             <a class="btn btn-lg btn-light btn-block mx-2" href="{% url 'todo:lists' %}" role="button"><i
                 class="fas fa-stream"></i> Lists </a>
-            <a href="{% url 'todo:mine' %}" type="button" class="btn btn-lg btn-light btn-block mx-2">
-              <i class="fas fa-check"></i> Tasks
-            </a>
-            <!--<a href="{% url 'logout' %}" type="button" class="btn btn-danger btn-sm mx-2">
-              <i class="fas fa-sign-out-alt"></i> Logout
-            </a>-->
+            <a class="btn btn-lg btn-light btn-block mx-2" href="{% url 'todo:mine' %}" role="button">
+              <i class="fas fa-check"></i> Tasks </a>
           </div>
           {% else %}
           <div class="d-flex align-items-center">
