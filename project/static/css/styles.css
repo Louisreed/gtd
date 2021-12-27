@@ -36,6 +36,31 @@ h7 {
     100%{background-position:0% 11%}
 }
 
+.bg-gradient-midday {
+    background: linear-gradient(68deg, #0097a7, #0288d1, #1976d2, #039be5, #0d47a1, #039be5);
+    background-size: 1200% 1200%;
+
+    -webkit-animation: TodoMidday 30s ease infinite;
+    -moz-animation: TodoMidday 30s ease infinite;
+    animation: TodoMidday 30s ease infinite;
+}
+
+@-webkit-keyframes TodoMidday {
+    0%{background-position:0% 56%}
+    50%{background-position:100% 45%}
+    100%{background-position:0% 56%}
+}
+@-moz-keyframes TodoMidday {
+    0%{background-position:0% 56%}
+    50%{background-position:100% 45%}
+    100%{background-position:0% 56%}
+}
+@keyframes TodoMidday {
+    0%{background-position:0% 56%}
+    50%{background-position:100% 45%}
+    100%{background-position:0% 56%}
+}
+
 .bg-gradient-evening {
     background: linear-gradient(320deg, #1266f1, #424242, #424242, #1266f1, #1266f1);
     background-size: 1000% 1000%;

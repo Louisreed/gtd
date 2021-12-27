@@ -194,11 +194,11 @@
     if (dt >= 1 && dt < 12) {
       // Morning
       console.log("It's morning");
-      $('.navbar').removeClass('.bg-gradient-evening navbar-light').addClass('bg-gradient-morning');
+      $('.navbar').removeClass('.bg-gradient-evening').addClass('bg-gradient-morning');
     } else if (dt >= 12 && dt < 18) {
       // Midday
       console.log("It's midday");
-      $('.navbar').removeClass('bg-light').addClass('bg-gradient-midday');
+      $('.navbar').removeClass('bg-gradient-morning').addClass('bg-gradient-midday');
     } else if (dt >= 18) {
       // Evening
       console.log("It's evening");
